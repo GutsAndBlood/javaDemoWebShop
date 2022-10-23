@@ -53,12 +53,12 @@ public class MainFuntionalityDemoShop {
 		Assert.assertEquals(controllerMainPage.NavbarUsername(), true);
 		
 		controllerMainPage.HeaderMenuElectronics();
-		
+		controllerMainPage.ButtonAddToCartSmartPhone();
 		
 	}
 	
 	@AfterTest
 	public void TearDown() {
-		driver.quit();
+		//driver.quit();
 	}
 }

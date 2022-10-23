@@ -15,6 +15,8 @@ public class MainPageDemoWebShop {
 	
 	By HeaderMenuElectronics = By.xpath("//a[@href='/electronics']");
 	By HeaderMenuElectronicsCellphone = By.xpath("//li/a[@href='/cell-phones']");
+	
+	By ButtonAddToCartSmartPhone = By.xpath("(//input[@value='Add to cart'])[1]");
 
 	public MainPageDemoWebShop(WebDriver driver) {
 		super();
@@ -41,6 +43,10 @@ public class MainPageDemoWebShop {
 		Actions action = new Actions(driver);
 		WebElement hoverElectronicCellphone = driver.findElement(HeaderMenuElectronics);
 		action.moveToElement(hoverElectronicCellphone).moveToElement(driver.findElement(HeaderMenuElectronicsCellphone)).click().build().perform();
+	}
+	
+	public void ButtonAddToCartSmartPhone() {
+		driver.findElement(ButtonAddToCartSmartPhone).click();
 	}
 	
 }
