@@ -9,9 +9,11 @@ import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
+import demoshop.pom.CheckoutDemoWebShop;
 import demoshop.pom.ElectronicsDemoWebShop;
 import demoshop.pom.LoginDemoWebShop;
 import demoshop.pom.MainPageDemoWebShop;
+import demoshop.pom.ShoppingCartDemoWebShop;
 import demoshop.utilities.CredentialsAdminUser;
 
 public class MainFuntionalityDemoShop {
@@ -51,6 +53,8 @@ public class MainFuntionalityDemoShop {
 		
 		MainPageDemoWebShop controllerMainPage = new MainPageDemoWebShop(driver);
 		ElectronicsDemoWebShop controllerElectronics = new ElectronicsDemoWebShop(driver);
+		ShoppingCartDemoWebShop controllerShoppingCart = new ShoppingCartDemoWebShop(driver);
+		CheckoutDemoWebShop controllerCheckout = new CheckoutDemoWebShop(driver);
 		
 		Assert.assertEquals(controllerMainPage.NavbarUsername(), true);
 		
@@ -64,11 +68,22 @@ public class MainFuntionalityDemoShop {
 		
 		controllerMainPage.NavbarShoppingCart();
 		
+		controllerShoppingCart.CheckboxTermsOfService();
+		controllerShoppingCart.ButtonShoppingCartCheckout();
 		
+		controllerCheckout.ButtonBillingAddressContinue();	
+		controllerCheckout.ButtonShippingAddressContinue();
+		controllerCheckout.ButtonShippingMethodContinue();
+		controllerCheckout.ButtonPaymentMethodContinue();
+		controllerCheckout.ButtonPaymentInformationContinue();
+		controllerCheckout.ButtonConfirmOrder();
+		controllerCheckout.ButtonPurcharseSuccess();
+		
+		Assert.assertEquals(controllerMainPage.getTitleMainPage(), "Demo Web Shop");
 	}
 	
 	@AfterTest
 	public void TearDown() {
-		//driver.quit();
+		driver.quit();
 	}
 }
