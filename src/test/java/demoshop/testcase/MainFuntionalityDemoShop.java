@@ -9,6 +9,7 @@ import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
+import demoshop.pom.ElectronicsDemoWebShop;
 import demoshop.pom.LoginDemoWebShop;
 import demoshop.pom.MainPageDemoWebShop;
 import demoshop.utilities.CredentialsAdminUser;
@@ -49,16 +50,18 @@ public class MainFuntionalityDemoShop {
 	public void TC02AddingTwoProductsToShoppingCart() {
 		
 		MainPageDemoWebShop controllerMainPage = new MainPageDemoWebShop(driver);
+		ElectronicsDemoWebShop controllerElectronics = new ElectronicsDemoWebShop(driver);
 		
 		Assert.assertEquals(controllerMainPage.NavbarUsername(), true);
 		
 		controllerMainPage.HeaderMenuElectronics();
-		controllerMainPage.ButtonAddToCartSmartPhone();
+		controllerElectronics.ButtonAddToCartSmartPhone();
+		
 		
 	}
 	
 	@AfterTest
 	public void TearDown() {
-		//driver.quit();
+		driver.quit();
 	}
 }
