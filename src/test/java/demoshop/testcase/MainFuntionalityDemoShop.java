@@ -56,12 +56,13 @@ public class MainFuntionalityDemoShop {
 		
 		controllerMainPage.HeaderMenuElectronics();
 		controllerElectronics.ButtonAddToCartSmartPhone();
+		controllerElectronics.ButtonAddToCartPhoneCover();
 		
 		
 	}
 	
 	@AfterTest
 	public void TearDown() {
-		driver.quit();
+		//driver.quit();
 	}
 }
