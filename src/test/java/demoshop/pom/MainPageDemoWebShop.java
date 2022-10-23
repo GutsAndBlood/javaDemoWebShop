@@ -12,6 +12,7 @@ public class MainPageDemoWebShop {
 	By NavbarLogin = By.xpath("//a[@class='ico-login']");
 	By NavbarUsername = By.xpath("//a[@class='account']");
 	By NavbarHomePage = By.xpath("//div/a[@href='/']");
+	By NavbarShoppingCart = By.xpath("//a[@class='ico-cart']");
 	
 	By HeaderMenuElectronics = By.xpath("//a[@href='/electronics']");
 	By HeaderMenuElectronicsCellphone = By.xpath("//li/a[@href='/cell-phones']");
@@ -44,4 +45,7 @@ public class MainPageDemoWebShop {
 		action.moveToElement(hoverElectronicCellphone).moveToElement(driver.findElement(HeaderMenuElectronicsCellphone)).click().build().perform();
 	}
 	
+	public void NavbarShoppingCart() {
+		driver.findElement(NavbarShoppingCart).click();
+	}
 }

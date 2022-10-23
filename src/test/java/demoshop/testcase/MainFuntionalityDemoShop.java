@@ -55,8 +55,14 @@ public class MainFuntionalityDemoShop {
 		Assert.assertEquals(controllerMainPage.NavbarUsername(), true);
 		
 		controllerMainPage.HeaderMenuElectronics();
+		
 		controllerElectronics.ButtonAddToCartSmartPhone();
 		controllerElectronics.ButtonAddToCartPhoneCover();
+		controllerElectronics.DropdownPhoneCoverManufacter();
+		controllerElectronics.DropdownPhoneCoverColor();
+		controllerElectronics.ButtonPhoneCoverAddToCart();
+		
+		controllerMainPage.NavbarShoppingCart();
 		
 		
 	}
