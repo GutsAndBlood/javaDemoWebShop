@@ -2,7 +2,9 @@ package demoshop.pom;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 public class ElectronicsDemoWebShop {
 	
@@ -14,7 +16,7 @@ public class ElectronicsDemoWebShop {
 	By DropdownPhoneCoverColor = By.xpath("//select[@id='product_attribute_80_1_38']");
 	By ButtonPhoneCoverAddToCartProductInfo = By.xpath("//input[@id='add-to-cart-button-80']");
 	
-	
+	By LoadingBlockWindow = By.xpath("//div[@class='ajax-loading-block-window']");
 	
 	public ElectronicsDemoWebShop(WebDriver driver) {
 		super();
@@ -44,6 +46,10 @@ public class ElectronicsDemoWebShop {
 	
 	public void ButtonPhoneCoverAddToCart() {
 		driver.findElement(ButtonPhoneCoverAddToCartProductInfo).click();
+	}
+
+	public void LoadingBlockWindow(WebDriverWait wait){
+		wait.until( ExpectedConditions.invisibilityOfElementLocated(LoadingBlockWindow));
 	}
 	
 }

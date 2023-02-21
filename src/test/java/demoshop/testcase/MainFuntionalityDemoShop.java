@@ -4,6 +4,7 @@ import java.time.Duration;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
@@ -20,12 +21,14 @@ public class MainFuntionalityDemoShop {
 	
 	private WebDriver driver;
 	private String driverPath=System.getProperty("user.dir");
+
+
 	
 	@BeforeTest
 	public void StartUp() {
 		
 			  
-		System.setProperty("webdriver.chrome.driver", driverPath+"/drivers/chromedriver.exe");
+		System.setProperty("webdriver.chrome.driver", driverPath+"/drivers/chromedriver");
 		driver = new ChromeDriver();		  
 		driver.manage().window().maximize();
 		driver.manage().deleteAllCookies();
@@ -57,26 +60,46 @@ public class MainFuntionalityDemoShop {
 		CheckoutDemoWebShop controllerCheckout = new CheckoutDemoWebShop(driver);
 		
 		Assert.assertEquals(controllerMainPage.NavbarUsername(), true);
+		WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(5)); 
+
 		
 		controllerMainPage.HeaderMenuElectronics();
 		
 		controllerElectronics.ButtonAddToCartSmartPhone();
+		controllerElectronics.LoadingBlockWindow(wait);
+
 		controllerElectronics.ButtonAddToCartPhoneCover();
+		controllerElectronics.LoadingBlockWindow(wait);
+
 		controllerElectronics.DropdownPhoneCoverManufacter();
 		controllerElectronics.DropdownPhoneCoverColor();
 		controllerElectronics.ButtonPhoneCoverAddToCart();
-		
+		controllerElectronics.LoadingBlockWindow(wait);
+
 		controllerMainPage.NavbarShoppingCart();
 		
 		controllerShoppingCart.CheckboxTermsOfService();
 		controllerShoppingCart.ButtonShoppingCartCheckout();
 		
-		controllerCheckout.ButtonBillingAddressContinue();	
+
+		controllerCheckout.ButtonBillingAddressContinue();
+		controllerCheckout.LoadingBillingAddress(wait);
+
 		controllerCheckout.ButtonShippingAddressContinue();
+		controllerCheckout.LoadingShippingAddress(wait);
+
 		controllerCheckout.ButtonShippingMethodContinue();
+		controllerCheckout.LoadingShippingMethod(wait);
+
 		controllerCheckout.ButtonPaymentMethodContinue();
+		controllerCheckout.LoadingPaymentMethod(wait);
+
 		controllerCheckout.ButtonPaymentInformationContinue();
+		controllerCheckout.LoadingPaymentInfo(wait);
+
 		controllerCheckout.ButtonConfirmOrder();
+		controllerCheckout.LoadingConfirmOrder(wait);
+
 		controllerCheckout.ButtonPurcharseSuccess();
 		
 		Assert.assertEquals(controllerMainPage.getTitleMainPage(), "Demo Web Shop");

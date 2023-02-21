@@ -2,6 +2,8 @@ package demoshop.pom;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 public class CheckoutDemoWebShop {
 	
@@ -14,6 +16,15 @@ public class CheckoutDemoWebShop {
 	By ButtonPaymentInformationContinue = By.xpath("//input[@onclick='PaymentInfo.save()']");
 	By ButtonConfirmOrder = By.xpath("//input[@onclick='ConfirmOrder.save()']");
 	By ButtonPurcharseSuccess = By.xpath("//input[@class='button-2 order-completed-continue-button']");
+
+	By LoadingBillingAddress = By.xpath("//span[@id='billing-please-wait']");
+	By LoadingShippingAddress = By.xpath("//span[@id='shipping-please-wait']");
+	By LoadingShippingMethod = By.xpath("//[@id='shipping-method-please-wait']");
+	By LoadingPaymentMethod = By.xpath("//span[@id='payment-method-please-wait']");
+	By LoadingPaymentInfo = By.xpath("//span[@id='payment-info-please-wait']");
+	By LoadingConfirmOrder = By.xpath("//span[@id='confirm-order-please-wait']");
+
+	
 
 	public CheckoutDemoWebShop(WebDriver driver) {
 		super();
@@ -46,5 +57,30 @@ public class CheckoutDemoWebShop {
 	
 	public void ButtonPurcharseSuccess() {
 		driver.findElement(ButtonPurcharseSuccess).click();
+	}
+
+	public void LoadingBillingAddress(WebDriverWait wait){
+		
+		wait.until( ExpectedConditions.invisibilityOfElementLocated(LoadingBillingAddress));
+	}
+
+	public void LoadingShippingAddress(WebDriverWait wait){
+		wait.until(ExpectedConditions.invisibilityOfElementLocated(LoadingShippingAddress));
+	}
+
+	public void LoadingShippingMethod(WebDriverWait wait){
+		wait.until(ExpectedConditions.invisibilityOfElementLocated(LoadingShippingMethod));
+	}
+
+	public void LoadingPaymentMethod(WebDriverWait wait){
+		wait.until(ExpectedConditions.invisibilityOfElementLocated(LoadingPaymentMethod));
+	}
+
+	public void LoadingPaymentInfo(WebDriverWait wait){
+		wait.until(ExpectedConditions.invisibilityOfElementLocated(LoadingPaymentInfo));
+	}
+
+	public void LoadingConfirmOrder(WebDriverWait wait){
+		wait.until(ExpectedConditions.invisibilityOfElementLocated(LoadingConfirmOrder));
 	}
 }
