@@ -1,41 +1,32 @@
-package demoshop.testcase;
+package demoshop.frontend;
 
-import java.time.Duration;
-
+import com.beust.jcommander.Parameter;
+import demoshop.testbase.TestNG_TestBase;
 import frontend.pages.*;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
-import org.testng.annotations.AfterTest;
-import org.testng.annotations.BeforeTest;
-import org.testng.annotations.Test;
+import org.testng.annotations.*;
 
-import demoshop.utilities.CredentialsAdminUser;
+import demoshop.testbase.CredentialsAdminUser;
 
-public class TestNG_DemoShop {
-	private WebDriver driver;
+public class TestNG_DemoShop extends TestNG_TestBase {
+
 	private LoginDemoWebShop loginPage;
 	private CredentialsAdminUser credentialsAdminUser;
 	private ElectronicsDemoWebShop electronicsPage;
 	private ShoppingCartDemoWebShop shoppingCartPage;
 	private CheckoutDemoWebShop checkoutPage;
 
-	
-	@BeforeTest
-	public void StartUp() {
-		driver = new ChromeDriver();
-		driver.manage().window().maximize();
-		driver.manage().deleteAllCookies();
-		driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(5));
-		driver.get("https://demowebshop.tricentis.com/");
+	@BeforeTest()
+	@Parameters("browser")
+	public void setUp(@Optional("chrome") String browser) {
+		super.setUp(browser);
 		loginPage = new LoginDemoWebShop(driver);
 		credentialsAdminUser = new CredentialsAdminUser();
 		electronicsPage = new ElectronicsDemoWebShop(driver);
 		shoppingCartPage = new ShoppingCartDemoWebShop(driver);
 		checkoutPage = new CheckoutDemoWebShop(driver);
 	}
-	
+
 	@Test(priority=1)
 	public void TC01_LoginByAdminUser() {
 		loginPage.clickOnLoginPage();
@@ -47,53 +38,57 @@ public class TestNG_DemoShop {
 
 	@Test(priority=2)
 	public void TC02_AddingTwoProductsToShoppingCart() {
-		Assert.assertEquals(electronicsPage.NavbarUsername(), true);
-		WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(5));
 
+        Assert.assertTrue(electronicsPage.NavbarUsername());
 		electronicsPage.HeaderMenuElectronics();
 
 		electronicsPage.ButtonAddToCartSmartPhone();
-		electronicsPage.LoadingBlockWindow(wait);
+		electronicsPage.LoadingBlockWindow();
 
 		electronicsPage.ButtonAddToCartPhoneCover();
-		electronicsPage.LoadingBlockWindow(wait);
+		electronicsPage.LoadingBlockWindow();
 
 		electronicsPage.DropdownPhoneCoverManufacture();
 		electronicsPage.DropdownPhoneCoverColor();
 		electronicsPage.ButtonPhoneCoverAddToCart();
-		electronicsPage.LoadingBlockWindow(wait);
+		electronicsPage.LoadingBlockWindow();
 
 		electronicsPage.NavbarShoppingCart();
 
+		Assert.assertEquals("Shopping cart", shoppingCartPage.ShoppingCartHeader());
+
 		shoppingCartPage.CheckboxTermsOfService();
 		shoppingCartPage.ButtonShoppingCartCheckout();
+	}
 
-
+	@Test(priority=3)
+	public void TC03_purchaseShoppingCart() {
 		checkoutPage.ButtonBillingAddressContinue();
-		checkoutPage.LoadingBillingAddress(wait);
+		checkoutPage.LoadingBillingAddress();
 
 		checkoutPage.ButtonShippingAddressContinue();
-		checkoutPage.LoadingShippingAddress(wait);
+		checkoutPage.LoadingShippingAddress();
 
 		checkoutPage.ButtonShippingMethodContinue();
-		checkoutPage.LoadingShippingMethod(wait);
+		checkoutPage.LoadingShippingMethod();
 
 		checkoutPage.ButtonPaymentMethodContinue();
-		checkoutPage.LoadingPaymentMethod(wait);
+		checkoutPage.LoadingPaymentMethod();
 
 		checkoutPage.ButtonPaymentInformationContinue();
-		checkoutPage.LoadingPaymentInfo(wait);
+		checkoutPage.LoadingPaymentInfo();
 
 		checkoutPage.ButtonConfirmOrder();
-		checkoutPage.LoadingConfirmOrder(wait);
+		checkoutPage.LoadingConfirmOrder();
 
 		checkoutPage.ButtonPurchaseSuccess();
-
 		Assert.assertEquals(checkoutPage.getTitleMainPage(), "Demo Web Shop");
 	}
 
-	@AfterTest
-	public void TearDown() {
-		driver.quit();
+	@AfterTest(groups = "regression")
+	public void tearDown() {
+		if (driver != null) {
+			driver.quit();
+		}
 	}
 }

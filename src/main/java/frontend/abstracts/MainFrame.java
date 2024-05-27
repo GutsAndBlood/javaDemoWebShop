@@ -7,11 +7,10 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.PageFactory;
 
-public class MainFrame {
+public abstract class MainFrame {
 
     By NavbarLogin = By.xpath("//a[@class='ico-login']");
     By NavbarUsername = By.xpath("//a[@class='account']");
-    By NavbarHomePage = By.xpath("//div/a[@href='/']");
     By NavbarShoppingCart = By.xpath("//a[@class='ico-cart']");
 
     By HeaderMenuElectronics = By.xpath("//a[@href='/electronics']");
@@ -34,10 +33,6 @@ public class MainFrame {
 
     public boolean NavbarUsername() {
         return driver.findElement(NavbarUsername).isDisplayed();
-    }
-
-    public void NavbarHomePage() {
-        driver.findElement(NavbarHomePage).click();
     }
 
     public void HeaderMenuElectronics() {

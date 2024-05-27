@@ -7,6 +7,8 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
+import java.time.Duration;
+
 public class ElectronicsDemoWebShop extends MainFrame {
 	
 	By ButtonAddToCartSmartPhone = By.xpath("(//input[@value='Add to cart'])[1]");
@@ -17,12 +19,12 @@ public class ElectronicsDemoWebShop extends MainFrame {
 	By ButtonPhoneCoverAddToCartProductInfo = By.xpath("//input[@id='add-to-cart-button-80']");
 	
 	By LoadingBlockWindow = By.xpath("//div[@class='ajax-loading-block-window']");
-	
+	WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(5));
+
+
 	public ElectronicsDemoWebShop(WebDriver driver) {
 		super(driver);
-		this.driver = driver;
 	}
-
 
 	public void ButtonAddToCartSmartPhone() {
 		driver.findElement(ButtonAddToCartSmartPhone).click();
@@ -35,20 +37,18 @@ public class ElectronicsDemoWebShop extends MainFrame {
 	public void DropdownPhoneCoverManufacture() {
 		Select DropdownListManufacture = new Select (driver.findElement(DropdownPhoneCoverManufacture));
 		DropdownListManufacture.selectByIndex(1);
-		
 	}
 	
 	public void DropdownPhoneCoverColor() {
 		Select DropdownListColor = new Select (driver.findElement(DropdownPhoneCoverColor));
 		DropdownListColor.selectByIndex(1);
-		
 	}
 	
 	public void ButtonPhoneCoverAddToCart() {
 		driver.findElement(ButtonPhoneCoverAddToCartProductInfo).click();
 	}
 
-	public void LoadingBlockWindow(WebDriverWait wait){
+	public void LoadingBlockWindow(){
 		wait.until( ExpectedConditions.invisibilityOfElementLocated(LoadingBlockWindow));
 	}
 	

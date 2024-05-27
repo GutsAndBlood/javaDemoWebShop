@@ -6,10 +6,10 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
+import java.time.Duration;
+
 public class CheckoutDemoWebShop extends MainFrame {
-	
-	WebDriver driver = null;
-	
+
 	By ButtonBillingAddressContinue = By.xpath("//input[@onclick='Billing.save()']");
 	By ButtonShippingAddressContinue = By.xpath("//input[@onclick='Shipping.save()']");
 	By ButtonShippingMethodContinue = By.xpath("//input[@onclick='ShippingMethod.save()']");
@@ -25,7 +25,9 @@ public class CheckoutDemoWebShop extends MainFrame {
 	By LoadingPaymentInfo = By.xpath("//span[@id='payment-info-please-wait']");
 	By LoadingConfirmOrder = By.xpath("//span[@id='confirm-order-please-wait']");
 
-	
+	WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(5));
+
+
 
 	public CheckoutDemoWebShop(WebDriver driver) {
 		super(driver);
@@ -60,28 +62,28 @@ public class CheckoutDemoWebShop extends MainFrame {
 		driver.findElement(ButtonPurchaseSuccess).click();
 	}
 
-	public void LoadingBillingAddress(WebDriverWait wait){
+	public void LoadingBillingAddress(){
 		
 		wait.until( ExpectedConditions.invisibilityOfElementLocated(LoadingBillingAddress));
 	}
 
-	public void LoadingShippingAddress(WebDriverWait wait){
+	public void LoadingShippingAddress(){
 		wait.until(ExpectedConditions.invisibilityOfElementLocated(LoadingShippingAddress));
 	}
 
-	public void LoadingShippingMethod(WebDriverWait wait){
+	public void LoadingShippingMethod(){
 		wait.until(ExpectedConditions.invisibilityOfElementLocated(LoadingShippingMethod));
 	}
 
-	public void LoadingPaymentMethod(WebDriverWait wait){
+	public void LoadingPaymentMethod(){
 		wait.until(ExpectedConditions.invisibilityOfElementLocated(LoadingPaymentMethod));
 	}
 
-	public void LoadingPaymentInfo(WebDriverWait wait){
+	public void LoadingPaymentInfo(){
 		wait.until(ExpectedConditions.invisibilityOfElementLocated(LoadingPaymentInfo));
 	}
 
-	public void LoadingConfirmOrder(WebDriverWait wait){
+	public void LoadingConfirmOrder(){
 		wait.until(ExpectedConditions.invisibilityOfElementLocated(LoadingConfirmOrder));
 	}
 }
